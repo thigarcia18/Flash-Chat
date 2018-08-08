@@ -6,7 +6,7 @@
 
 
 import UIKit
-
+import Firebase
 
 class LogInViewController: UIViewController {
 
@@ -22,17 +22,18 @@ class LogInViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
    
     @IBAction func logInPressed(_ sender: AnyObject) {
-
         
-        //TODO: Log in the user
-        
+        Auth.auth().signIn(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { user, error in
+            if error != nil {
+                print(error!)
+            } else {
+                print("Login succesfull")
+                
+                self.performSegue(withIdentifier: "goToChat", sender: self)
+            }
+        }
         
     }
-    
-
-
-    
 }  
